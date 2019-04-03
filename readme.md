@@ -8,4 +8,4 @@
 "git-lesson-repository")
   * [h-mark-s.github.io](https://h-mark-s.github.io/ "h-mark-s.github.io")
 
-## [GitHub website](https://h-mark-s.github.io/hmarks/ "My GitHub  website")
+## [GitHub website](https://h-mark-s.github.io/ "My GitHub  website")
