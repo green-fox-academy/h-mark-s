@@ -1,4 +1,4 @@
-# H1 The repositories I created so far:
+# The repositories I created so far:
 
   * [hello-world](https://github.com/h-mark-s/hello-world "hello-world")
   * [patchwork](https://github.com/h-mark-s/patchwork "patchwork")
