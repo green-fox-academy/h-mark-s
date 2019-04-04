@@ -7,3 +7,5 @@ let myHeight: number=1.84;
 console.log(myName);
 console.log(myAge);
 console.log(myHeight);
+
+export{}
