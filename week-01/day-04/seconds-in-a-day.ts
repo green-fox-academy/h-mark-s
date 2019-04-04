@@ -4,8 +4,8 @@ let currentHours: number = 14;
 let currentMinutes: number = 34;
 let currentSeconds: number = 42;
 
-let passedSeconds: number = currentHours * 60 * 60 + currentMinutes * 60 + currentSeconds;
-let secondsInADay: number = 24 * 60 * 60;
-let remainingSeconds: number = secondsInADay - passedSeconds;
+// let passedSeconds: number = currentHours * 60 * 60 + currentMinutes * 60 + currentSeconds;
+// let secondsInADay: number = 24 * 60 * 60;
+// let remainingSeconds: number = secondsInADay - passedSeconds;
 
-console.log(remainingSeconds);
+console.log((24 * 60 * 60) - (currentHours * 60 * 60 + currentMinutes * 60 + currentSeconds));
