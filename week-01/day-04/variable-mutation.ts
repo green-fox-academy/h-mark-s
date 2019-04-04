@@ -47,3 +47,5 @@ console.log(Boolean(i1 > (i2**2) && i1 < i2**3));
 let j: number = 1521;
 
 console.log(Boolean((j % 3) === 0 || (j %5) === 0));
+
+export {}
