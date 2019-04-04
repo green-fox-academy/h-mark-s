@@ -13,3 +13,5 @@ b = c - a;
 
 console.log('"a" is now ' + a + '.');
 console.log('"b" is now ' + b + '.');
+
+export {}
