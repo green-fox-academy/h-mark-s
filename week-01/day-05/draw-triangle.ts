@@ -9,3 +9,5 @@ for (let i: number = 1; i <=lineCount; i++) {
     triangle = triangle + triangleComponent;
     console.log(triangle);
 }
+
+export{}
