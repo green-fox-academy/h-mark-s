@@ -19,6 +19,8 @@ for (let i: number = 0; i < lineCount; i++) {
     console.log(pyramid);
 }
 
+export {}
+
 /* for (let i: number = 1; i <= lineCount; i++) {
     for (let j: number = 1; j <= lineCount; j++) {
         pyramid = pyramid + space;
