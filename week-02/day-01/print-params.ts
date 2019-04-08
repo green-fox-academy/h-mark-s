@@ -1,12 +1,10 @@
 'use strict';
 
-let input: any[] = ['ember', 1, 8];
-
-function printParams(): any {
-    console.log(input); 
+function printParams(...dolgok: any[]): void {
+    dolgok.forEach(dolog => console.log(dolog));
 }
 
-printParams();
+printParams('ember', 8, 1);
 
 // -  Create a function called `printParams`
 //    which logs to the console the input parameters
