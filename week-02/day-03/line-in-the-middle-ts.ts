@@ -19,3 +19,5 @@ ctx.strokeStyle = 'green';
 ctx.moveTo(300, 0);
 ctx.lineTo(300, 600);
 ctx.stroke();
+
+export{}
