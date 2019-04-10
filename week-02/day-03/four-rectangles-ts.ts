@@ -21,3 +21,5 @@ ctx.fillRect(300, 450, 92, 123);
 ctx.beginPath();
 ctx.fillStyle = 'red';
 ctx.fillRect(200, 380, 280, 50);
+
+export{}
