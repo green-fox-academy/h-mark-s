@@ -3,6 +3,7 @@
 // Given a string, compute recursively (no loops) a new string
 // where all the lowercase 'x' chars have been changed to 'y' chars.
 
+var stringToChange: string = 'abcdexXfghxixxx';
 
 function recurString (input: string): string {
   if (input.indexOf('x') === -1) {
@@ -15,4 +16,5 @@ function recurString (input: string): string {
   }
 }
 
-console.log(recurString('abcdexXfghxixxx')) 
+console.log(recurString(stringToChange));
+console.log(stringToChange);
