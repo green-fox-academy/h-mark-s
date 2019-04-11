@@ -10,4 +10,4 @@ function gcd(a: number, b: number): number {
   }
 } 
 
-console.log(gcd(54,24));
+console.log(gcd(8,4));
