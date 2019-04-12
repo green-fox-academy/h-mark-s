@@ -28,4 +28,5 @@ function fractalTriangle(startX: number, startY: number, length: number, depth: 
 }
 
 fractalTriangle(0, 0, 600, 48);
-  
+
+export{}
