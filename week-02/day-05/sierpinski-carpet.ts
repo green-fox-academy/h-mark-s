@@ -26,3 +26,5 @@ function sierpinskiCarpet(startX: number, startY: number, length: number, depth:
 }
 
 sierpinskiCarpet(0, 0, rectLength, 1000);
+
+export{}
