@@ -45,14 +45,22 @@ console.log(diceSet.getCurrent());
 
 console.log("------------------");
 
+// function allSixes(dices: DiceSet) {
+//   for (let i = 0; i < dices.getCurrent().length; i++) {
+//     if (dices.getCurrent(i) == 6) {  
+//     }
+//     else {
+//       dices.reroll(i);
+//       allSixes(dices)
+//     }
+//   }
+// }
+
 function allSixes(dices: DiceSet) {
   for (let i = 0; i < dices.getCurrent().length; i++) {
-    if (dices.getCurrent(i) == 6) {  
-    }
-    else {
+    do {
       dices.reroll(i);
-      allSixes(dices)
-    }
+    } while(dices.getCurrent(i) !== 6)
   }
 }
 
