@@ -58,9 +58,9 @@ console.log("------------------");
 
 function allSixes(dices: DiceSet) {
   for (let i = 0; i < dices.getCurrent().length; i++) {
-    do {
+    while(dices.getCurrent(i) !== 6) {
       dices.reroll(i);
-    } while(dices.getCurrent(i) !== 6)
+    }
   }
 }
 
