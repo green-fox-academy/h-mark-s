@@ -3,7 +3,6 @@
 import { Plant } from './plant';
 
 class Flower extends Plant{
-// typeOfPlant: string = Flower.name;
 
   checkIfNeedsWater(): boolean {
     if (this.waterAmount < 5) {

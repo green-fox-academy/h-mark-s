@@ -4,7 +4,6 @@ import { Plant } from './plant';
 
 class Tree extends Plant {
 
-
   checkIfNeedsWater(): boolean {
     if (this.waterAmount < 10) {
       this.needsWater = true;
@@ -14,7 +13,6 @@ class Tree extends Plant {
       return this.needsWater;
     }
   }
-
 
   water(waterToAdd: number): void{
     if (this.waterAmount < 10) {

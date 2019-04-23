@@ -1,6 +1,5 @@
 'use strict';
 
-import { Plant } from './plant';
 import { Tree } from './the-tree';
 import { Flower } from './the-flower';
 import { Garden } from './the-garden';

@@ -1,6 +1,5 @@
 'use strict';
 
-import { Plant } from './plant';
 import { Tree } from './the-tree';
 import { Flower } from './the-flower';
 
@@ -22,20 +21,6 @@ class Garden {
   addFlower(flower: Flower) {
     this.flowers.push(flower);
   }
-
-// feladatok: 1. kell-e viz, 2. elosztas
-
-  // waterTrees(waterToAdd: number): void {
-  //   for (let i = 0; i < this.trees.length; i++) {
-  //     this.trees[i].water(waterToAdd/this.trees.length);
-  //   }
-  // }
-
-  // waterFlowers(waterToAdd: number): void {
-  //   for (let i = 0; i < this.flowers.length; i++) {
-  //     this.flowers[i].water(waterToAdd/this.flowers.length);
-  //   }
-  // }
 
   checkGarden(): void {
     for (let i = 0; i < this.trees.length; i++) {
@@ -61,24 +46,8 @@ class Garden {
       } for (let k = 0; k < this.plantsToWater.length; k++) {
         this.plantsToWater[k].water(waterToAdd/this.plantsToWater.length);
         this.plantsToWater[k].checkIfNeedsWater();
-        // if (this.plantsToWater[k] instanceof Flower) {
-        //   console.log(`The ${this.plantsToWater[k].color} Flower ${this.plantsToWater[k].needsWater ? 'needs' : 'doesnt need'} water.`);
-        // } else if (this.plantsToWater[k] instanceof Tree) {
-        //   console.log (`The ${this.plantsToWater[k].color} Tree ${this.plantsToWater[k].needsWater ? 'needs' : 'doesnt need'} water.`)
-        // }
     } this.checkGarden();
   }
-
-  // watering(waterToAdd: number): number{
-  //   for (let i = 0; i < this.plants.length; i++) {
-  //     if (this.plants[i].checkIfNeedsWater() == true) {
-  //       this.waterAmount += waterToAdd;
-  //       return this.waterAmount;
-  //     }
-  //   }
-  // }
-
-
 
 }
 
