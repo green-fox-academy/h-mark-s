@@ -7,17 +7,19 @@ class Flower extends Plant{
 
   checkIfNeedsWater(): boolean {
     if (this.waterAmount < 5) {
-      return true;
+      this.needsWater = true;
+      return this.needsWater;
     } else {
-      return false;
+      this.needsWater = false;
+      return this.needsWater;
     }
   }
 
-  // water(waterToAdd: number): void{
-  //   if (this.waterAmount < 5) {
-  //     this.waterAmount += waterToAdd * 0.75;
-  //   }
-  // }
+  water(waterToAdd: number): void{
+    if (this.waterAmount < 5) {
+      this.waterAmount += waterToAdd * 0.75;
+    }
+  }
 
 }
 
