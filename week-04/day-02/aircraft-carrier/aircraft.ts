@@ -22,8 +22,13 @@ class Aircraft {
   }
 
   refill(ammoToRefill: number): number {
-    this.currentAmmo = this.maxAmmo;
-    return ammoToRefill - this.maxAmmo;
+    if (ammoToRefill > this.maxAmmo - this.currentAmmo){
+      this.currentAmmo = this.maxAmmo;
+      return ammoToRefill = ammoToRefill - (this.maxAmmo - this.currentAmmo); 
+    } else {
+      this.currentAmmo += ammoToRefill;
+      return ammoToRefill = 0;
+    }
   }
 
   getType(): void {
@@ -43,3 +48,5 @@ class Aircraft {
   }
 
 }
+
+export { Aircraft };
