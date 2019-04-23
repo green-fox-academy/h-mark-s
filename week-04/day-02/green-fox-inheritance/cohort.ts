@@ -9,16 +9,17 @@ class Cohort {
   mentors: string[];
 
   constructor(name: string) {
+    this.name = name;
     this.students = [];
     this.mentors = [];
   }
 
   addStudent(student: Student): void {
-    this.students.push(student);
+    this.students.push(student.name);
   }
 
   addMentor(mentor: Mentor): void {
-    this.mentors.push(mentor);
+    this.mentors.push(mentor.name);
   }
 
   info(): void {
