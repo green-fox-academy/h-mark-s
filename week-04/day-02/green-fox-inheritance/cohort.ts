@@ -1,12 +1,17 @@
 'use strict'
 
-import { Student } from '.student';
-import { Mentor } from '.mentor';
+import { Student } from './student';
+import { Mentor } from './mentor';
 
 class Cohort {
   name: string;
-  students: any[];
-  mentors: any[];
+  students: string[];
+  mentors: string[];
+
+  constructor(name: string) {
+    this.students = [];
+    this.mentors = [];
+  }
 
   addStudent(student: Student): void {
     this.students.push(student);
@@ -17,7 +22,8 @@ class Cohort {
   }
 
   info(): void {
-    console.log(`The ${this.name} cohort has ${this.students.size()} `);
-    
+    console.log(`The ${this.name} cohort has ${this.students.length} students and ${this.mentors.length} mentors.`);
   }
 }
+
+export { Cohort };

@@ -24,3 +24,5 @@ class Sponsor extends Person{
     this.hiredStudents++;
   }
 }
+
+export { Sponsor };

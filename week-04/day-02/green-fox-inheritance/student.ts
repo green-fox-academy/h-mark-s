@@ -24,3 +24,5 @@ class Student extends Person{
     this.skippedDays += numberOfDays;
   }
 }
+
+export { Student };
