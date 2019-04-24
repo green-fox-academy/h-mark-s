@@ -3,13 +3,12 @@
 import { Aircraft } from './aircraft';
 
 class Carrier {
-  initialAmmo: number;
-  healthPoint: number;
-  aircrafts: Aircraft[];
+  aircrafts: Aircraft[] = [];
   storeOfAmmo: number;
+  healthPoint: number;
 
-  constructor(initialAmmo: number, healthPoint: number) {
-    this.initialAmmo = initialAmmo;
+  constructor(storeOfAmmo: number, healthPoint: number) {
+    this.storeOfAmmo = storeOfAmmo;
     this.healthPoint = healthPoint;
   }
 
@@ -17,10 +16,14 @@ class Carrier {
     this.aircrafts.push(aircraft);
   }
 
-  fill(storeOfAmmo): void {
-    for (let i = 0; i < this.aircrafts.length; i++) {
-      this.aircrafts[i].refill(storeOfAmmo);
-    } return storeOfAmmo;
+  fill(): number {
+    for (let i: number = 0; i < this.aircrafts.length; i++) {
+      this.aircrafts[i].refill(this.storeOfAmmo/this.aircrafts.length);
+    } return this.storeOfAmmo;
+
+    // If there is not enough ammo then it should start to fill the aircraftis with priority first
+    // If there is no ammo when this method is called, it should throw an exception
+
   }
 
   fight() {
