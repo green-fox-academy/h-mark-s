@@ -7,3 +7,5 @@ function anagram(a: string, b: string): boolean {
 }
 
 console.log(anagram('mark', 'kram'))
+
+export { anagram };
