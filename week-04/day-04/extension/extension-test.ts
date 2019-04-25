@@ -6,32 +6,32 @@ declare function require(path: string): any;
 var test = require('tape').test;
 
 test('add: 2 and 3 is 5', function (t: any): any {
-  t.equal(add(2, 3), 5);
+  t.equal(add(2, 321), 323);
   t.end();
 });
 
 test('add: 1 and 4 is 5', function (t: any): any {
-  t.equal(add(1, 4), 5);
+  t.equal(add(1, 14), 15);
   t.end();
 });
 
 test('max of three: first', function (t: any): any {
-  t.equal(maxOfThree(5, 4, 3), 5);
+  t.equal(maxOfThree(65, 43, 7), 65);
   t.end();
 });
 
 test('max of three: third', function (t: any): any {
-  t.equal(maxOfThree(3, 4, 5), 5);
+  t.equal(maxOfThree(7, 43, 65), 65);
   t.end();
 });
 
 test('median: four', function (t: any): any {
-  t.equal(median([7, 5, 3, 5]), 5);
+  t.equal(median([1, 2, 5, 4, 3, 1, 4, 3, 3, 4, 3, 5, 1]), 3);
   t.end();
 });
 
 test('median: five', function (t: any): any {
-  t.equal(median([1, 2, 3, 4, 5]), 3);
+  t.equal(median([1, 4, 2, 4, 2, 3, 5, 3, 1, 1]), 2.5);
   t.end();
 });
 
