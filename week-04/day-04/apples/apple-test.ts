@@ -9,7 +9,7 @@ test('returning string', function (t: any) {
   const apple: Apple = new Apple();
 
   const actual = apple.getApple();
-  const expected: string = 'banana';
+  const expected: string = 'apple';
 
   t.equal(actual, expected);
   t.end();
