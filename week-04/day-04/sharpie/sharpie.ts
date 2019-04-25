@@ -2,8 +2,8 @@
 
 class Sharpie {
   color: string;
-  width: number; //floating point???
-  inkAmount: number; //floating point??
+  width: number;
+  inkAmount: number;
 
   constructor(color: string, width: number, inkAmount: number = 100) {
     this.color = color;
