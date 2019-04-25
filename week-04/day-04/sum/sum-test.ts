@@ -1,14 +1,14 @@
 'use strict';
 
-import { Sum } from './sum';
+import { Numbers } from './sum';
 
 declare function require(path: string): any;
 var test = require('tape').test
 
 test('return sum of numbers', function(t: any) {
-  const sum: Sum = new Sum();
+  const numbers1: Numbers = new Numbers();
 
-  const actual = sum.sum(1, 2, 3);
+  const actual = numbers1.sum([1, 2, 3]);
   const expected: number = 1 + 2 + 3;
 
   t.equal(actual, expected);
