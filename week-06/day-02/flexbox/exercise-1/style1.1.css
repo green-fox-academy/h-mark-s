@@ -1,0 +1,28 @@
+.container {
+  box-sizing: border-box;
+  padding: 50px;
+  display: flex;
+  width: 675px;
+  height: 295px;
+}
+
+.item-green {
+  background-color: #51d400;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.item-yellow {
+  background-color: #ffd62a;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.item-purple {
+  background-color: #b02aff;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+}
