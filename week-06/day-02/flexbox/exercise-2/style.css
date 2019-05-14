@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+}
+
+.container {
+  box-sizing: border-box;
+  margin: 50px;
+  width: 800px;
+  height: 385px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffd62a;
+  /* position: relative; */
+}
+
+/* .item-yellow {
+  background-color: #ffd62a;
+  height: 100%;
+  width: 100%;
+} */
+
+.item-purple {
+  background-color: #b02aff;
+  height: 100px;
+  width: 100px;
+  /* position: absolute; */
+}
