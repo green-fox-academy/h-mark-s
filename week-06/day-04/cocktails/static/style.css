@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  width: 600px;
+  margin: auto;
+  color: black;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  text-transform: uppercase;
+  color: white;
+  background-color: black;
+  text-align: center;
+}
+
+#name {
+  height: 30px;
+  width: 500px;
+  border: 1px solid black;
+}
+
+#price {
+  height: 30px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.cocktails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 80px;
+  width: 600px; */
+}
+
+.cocktails:nth-of-type(odd) {
+  background-color: #ededed;
+}
+
+.cocktail-data {
+  height: 80px;
+  width: 500px;
+  border: 1px solid black;
+}
+
+.cocktail-price {
+  height: 80px;
+  width: 100px;
+  border: 1px solid black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cocktail-name {
+  font-weight: bold;
+}
