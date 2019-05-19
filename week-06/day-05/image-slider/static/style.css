@@ -45,6 +45,11 @@ body {
 
 .highlighted-photo {
   position: relative;
+	display: inline-flex;
+}
+
+.highlighted-photo > img {
+	height: 100%;
 }
 
 .highlighted-photo > * {
