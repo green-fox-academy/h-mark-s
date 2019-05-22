@@ -69,6 +69,10 @@ app.post('/dountil/:action', (req, res) => {
     for (let i = 1; i <= req.body.until; i++) {
       num = num * i;
     }
+  } else if (req.params.until === undefined) {
+    res.send({
+      "error": "Please provide a number!",
+    });
   }
 });
 
