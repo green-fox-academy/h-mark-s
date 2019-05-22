@@ -6,6 +6,10 @@ const path = require('path');
 const app = express();
 const port = 8080;
 
+// express.json -> body parser beepitett verzioja,
+// a json-t at tudja alakitani js objektumma, amit mar tudok olvasni
+
+app.use(express.json());
 app.use(express.static('assets'));
 
 app.get('/', (req, res) => {
@@ -51,8 +55,21 @@ app.get('/appenda/:appendable', (req, res) => {
   });
 });
 
-app.get('/users/:userId', (req, res) => {
-  return res.send(users[req.params.userId]);
+app.post('/dountil/:action', (req, res) => {
+  if (req.params.action === "sum") {
+    let sum = 0;
+    for (let i = 0; i <= req.body.until; i++) {
+      sum += i;
+    };
+    res.send({
+      "result": sum,
+    });
+  } else if (req.params.action === "factor") {
+    let num = 1;
+    for (let i = 1; i <= req.body.until; i++) {
+      num = num * i;
+    }
+  }
 });
 
 
