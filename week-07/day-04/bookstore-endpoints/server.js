@@ -7,8 +7,6 @@ const mysql = require('mysql');
 const port = 9875;
 const path = require('path');
 app.use(express.static('public'));
-  // '/', 
-  // express.static('/'));
 
 app.use(express.json());
 
@@ -28,7 +26,7 @@ conn.connect(err => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'));
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 app.get('/list', (req, res) => {
@@ -43,7 +41,7 @@ app.get('/list', (req, res) => {
 
 app.get('/full-list', (req, res) => {
   conn.query(
-    `SELECT book_mast.book_name AS 'title of book', author.aut_name AS 'name of author', category.cate_descrip AS 'category', publisher.pub_name AS 'name of publisher', book_mast.book_price AS 'price'
+    `SELECT book_mast.book_name AS 'title', author.aut_name AS 'author', category.cate_descrip AS 'category', publisher.pub_name AS 'publisher', book_mast.book_price AS 'price'
     FROM book_mast
     JOIN author
       ON book_mast.aut_id = author.aut_id
