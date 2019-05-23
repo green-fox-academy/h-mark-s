@@ -5,6 +5,10 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const port = 9875;
+const path = require('path');
+app.use(express.static('public'));
+  // '/', 
+  // express.static('/'));
 
 app.use(express.json());
 
@@ -21,6 +25,10 @@ conn.connect(err => {
     return;
   }
   console.log('Connection to DB is OK!');
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 app.get('/list', (req, res) => {
@@ -44,12 +52,12 @@ app.get('/full-list', (req, res) => {
     JOIN publisher
       ON book_mast.pub_id = publisher.pub_id
     ORDER BY book_mast.book_name ASC;`, (err, rows) => {
-      if (err) {
-        console.log(err.toString());
-        return;
-      }
-      res.send(rows);
-    });
+    if (err) {
+      console.log(err.toString());
+      return;
+    }
+    res.send(rows);
+  });
 });
 
 app.listen(port, () => {
