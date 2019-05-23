@@ -33,6 +33,25 @@ app.get('/list', (req, res) => {
   });
 });
 
+app.get('/full-list', (req, res) => {
+  conn.query(
+    `SELECT book_mast.book_name AS 'title of book', author.aut_name AS 'name of author', category.cate_descrip AS 'category', publisher.pub_name AS 'name of publisher', book_mast.book_price AS 'price'
+    FROM book_mast
+    JOIN author
+      ON book_mast.aut_id = author.aut_id
+    JOIN category
+      ON book_mast.cate_id = category.cate_id
+    JOIN publisher
+      ON book_mast.pub_id = publisher.pub_id
+    ORDER BY book_mast.book_name ASC;`, (err, rows) => {
+      if (err) {
+        console.log(err.toString());
+        return;
+      }
+      res.send(rows);
+    });
+});
+
 app.listen(port, () => {
   console.log(`Listening at port ${port}!`)
 });
