@@ -6,6 +6,8 @@ const app = express();
 const mysql = require('mysql');
 const port = 7776;
 
+app.use(express.json());
+
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -27,9 +29,11 @@ app.get('/posts', (req, res) => {
       console.log(err.toString());
       return;
     }
-    res.send(rows);
+    res.status(200).json(rows);
   });
 });
+
+
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}!`);
