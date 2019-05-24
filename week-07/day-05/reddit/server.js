@@ -18,6 +18,7 @@ const conn = mysql.createConnection({
 conn.connect(err => {
   if (err) {
     console.log(err.toString());
+    res.status(404).send('Error connecting to database!')
     return;
   }
   console.log('Connection to DB is A-OK!');
@@ -27,6 +28,7 @@ app.get('/posts', (req, res) => {
   conn.query(`SELECT * FROM posts;`, (err, rows) => {
     if (err) {
       console.log(err.toString());
+      res.status(500).send('FATAL ERROR');
       return;
     }
     res.status(200).json(rows);
@@ -37,13 +39,13 @@ app.post('/posts', (req, res) => {
   conn.query(`INSERT INTO posts(title, url, username) VALUES(?,?,?);`, [req.body.title, req.body.url, req.body.username], (err) => {
     if (err) {
       console.log(err.toString());
-      res.status(500);
+      res.status(500).send('FATAL ERROR');
       return;
     }
     conn.query(`SELECT * FROM posts ORDER BY pId DESC LIMIT 1;`, (err, rows) => {
       if (err) {
         console.log(err.toString());
-        res.status(500);
+        res.status(500).send('FATAL ERROR');
         return;
       }
       res.status(201).json(rows);
@@ -55,13 +57,13 @@ app.post('/users', (req, res) => {
   conn.query(`INSERT INTO users(username) VALUES(?);`, req.body.username, (err) => {
     if (err) {
       console.log(err.toString());
-      res.status(500);
+      res.status(500).send('FATAL ERROR');
       return;
     }
     conn.query(`SELECT * FROM users WHERE username="` + req.body.username +`";`, (err, rows) => {
       if (err) {
         console.log(err.toString());
-        res.status(500);
+        res.status(500).send('FATAL ERROR');
         return;
       }
       res.status(201).json(rows);
@@ -73,13 +75,13 @@ app.put('/posts/:pid/upvote', (req, res) => {
   conn.query(`UPDATE posts SET score = score + 1 WHERE pId=` + req.params.pid, (err) => {
     if (err) {
       console.log(err.toString());
-      res.status(500);
+      res.status(500).send('FATAL ERROR');
       return;
     }
     conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
       if (err) {
         console.log(err.toString());
-        res.status(500);
+        res.status(500).send('FATAL ERROR');
         return;
       }
       res.status(202).json(rows);
@@ -91,26 +93,26 @@ app.put('/posts/:username/:pid/downvote', (req, res) => {
   conn.query(`SELECT * FROM votes WHERE username="` + req.params.username+ `" AND pId ="` + req.params.pid + `";`, (err, rows) => {
     if (err) {
       console.log(err.toString());
-      res.status(500);
+      res.status(500).send('FATAL ERROR');
       return;
     }
     if (rows.length === 0) {
       conn.query('INSERT INTO votes(username, pId, vote) VALUES(?,?,?);', [req.params.username, req.params.pid, -1], (err) => {
         if (err) {
           console.log(err.toString());
-          res.status(500);
+          res.status(500).send('FATAL ERROR');
           return;
         }
         conn.query('UPDATE posts SET score = score - 1 WHERE pId=' + req.params.pid, (err) => {
           if (err) {
             console.log(err.toString());
-            res.status(500);
+            res.status(500).send('FATAL ERROR');
             return;
           }
           conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
             if (err) {
               console.log(err.toString());
-              res.status(500);
+              res.status(500).send('FATAL ERROR');
               return;
             }
             res.status(202).json(rows);
@@ -121,7 +123,7 @@ app.put('/posts/:username/:pid/downvote', (req, res) => {
       conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
         if (err) {
           console.log(err.toString());
-          res.status(500);
+          res.status(500).send('FATAL ERROR');
           return;
         }
         console.log('ONE VOTE per post, motherfucker.')
@@ -135,26 +137,26 @@ app.put('/posts/:username/:pid/upvote', (req, res) => {
   conn.query(`SELECT * FROM votes WHERE username="` + req.params.username+ `" AND pId ="` + req.params.pid + `";`, (err, rows) => {
     if (err) {
       console.log(err.toString());
-      res.status(500);
+      res.status(500).send('FATAL ERROR');
       return;
     }
     if (rows.length === 0) {
       conn.query('INSERT INTO votes(username, pId, vote) VALUES(?,?,?);', [req.params.username, req.params.pid, 1], (err) => {
         if (err) {
           console.log(err.toString());
-          res.status(500);
+          res.status(500).send('FATAL ERROR');
           return;
         }
         conn.query('UPDATE posts SET score = score + 1 WHERE pId=' + req.params.pid, (err) => {
           if (err) {
             console.log(err.toString());
-            res.status(500);
+            res.status(500).send('FATAL ERROR');
             return;
           }
           conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
             if (err) {
               console.log(err.toString());
-              res.status(500);
+              res.status(500).send('FATAL ERROR');
               return;
             }
             res.status(202).json(rows);
@@ -165,7 +167,7 @@ app.put('/posts/:username/:pid/upvote', (req, res) => {
       conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
         if (err) {
           console.log(err.toString());
-          res.status(500);
+          res.status(500).send('FATAL ERROR');
           return;
         }
         console.log('ONE VOTE per post, motherfucker!')
