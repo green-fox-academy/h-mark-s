@@ -51,6 +51,42 @@ app.post('/posts', (req, res) => {
   });
 });
 
+app.post('/posts/:id/upvote', (req, res) => {
+  conn.query(`UPDATE post SET score = score + 1 WHERE id=` + req.params.id, (err) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500);
+      return;
+    }
+  });
+  conn.query(`SELECT * FROM post WHERE id=` + req.params.id, (err, rows) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500);
+      return;
+    }
+    res.status(202).json(rows);
+  });
+});
+
+app.post('/posts/:id/downvote', (req, res) => {
+  conn.query(`UPDATE post SET score = score -1 WHERE id=` + req.params.id, (err) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500);
+      return;
+    }
+  });
+  conn.query(`SELECT * FROM post WHERE id=` + req.params.id, (err, rows) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500);
+      return;
+    }
+    res.status(202).json(rows);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}!`);
 });
