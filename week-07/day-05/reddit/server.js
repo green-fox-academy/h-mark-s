@@ -21,6 +21,16 @@ conn.connect(err => {
   console.log('Connection to DB is A-OK!');
 });
 
+app.get('/posts', (req, res) => {
+  conn.query(`SELECT * FROM post;`, (err, rows) => {
+    if (err) {
+      console.log(err.toString());
+      return;
+    }
+    res.send(rows);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}!`);
 });
