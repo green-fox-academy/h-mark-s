@@ -36,19 +36,35 @@ app.get('/posts', (req, res) => {
 });
 
 app.post('/posts', (req, res) => {
+  conn.query('SELECT * FROM users WHERE username=?;', req.body.username, (err, rows) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('FATAL ERROR');
+      return;
+    }
+    if (rows.length === 0) {
+      conn.query('INSERT INTO users(username) VALUES(?);', req.body.username, (err) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500).send('FATAL ERROR');
+          return;
+        }
+      });
+    }
   conn.query(`INSERT INTO posts(title, url, username) VALUES(?,?,?);`, [req.body.title, req.body.url, req.body.username], (err) => {
     if (err) {
       console.log(err.toString());
       res.status(500).send('FATAL ERROR');
       return;
     }
-    conn.query(`SELECT * FROM posts ORDER BY pId DESC LIMIT 1;`, (err, rows) => {
-      if (err) {
-        console.log(err.toString());
-        res.status(500).send('FATAL ERROR');
-        return;
-      }
-      res.status(201).json(rows);
+      conn.query(`SELECT * FROM posts ORDER BY pId DESC LIMIT 1;`, (err, rows) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500).send('FATAL ERROR');
+          return;
+        }
+        res.status(201).json(rows);
+      });
     });
   });
 });
