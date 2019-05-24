@@ -27,6 +27,9 @@ window.onload = () => {
       fullList.innerHTML += '<tr><td>' + allTheData[i].title + '</td><td>' + allTheData[i].author + '</td><td>' + allTheData[i].category + '</td><td>' + allTheData[i].publisher + '</td><td>' + allTheData[i].price + '</td></tr>';
     }
   }
+
+  
+
 }
 
 
