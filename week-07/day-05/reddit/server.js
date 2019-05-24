@@ -25,7 +25,7 @@ conn.connect(err => {
 });
 
 app.get('/posts', (req, res) => {
-  conn.query(`SELECT * FROM posts;`, (err, rows) => {
+  conn.query(`SELECT * FROM posts WHERE status='active';`, (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500).send('FATAL ERROR');
@@ -105,7 +105,7 @@ app.put('/posts/:pid/upvote', (req, res) => {
   });
 });
 
-app.put('/posts/:username/:pid/downvote', (req, res) => {
+app.put('/posts/downvote/:pid/:username', (req, res) => {
   conn.query(`SELECT * FROM votes WHERE username=? AND pId=?;`, [req.params.username, req.params.pid], (err, rows) => {
     if (err) {
       console.log(err.toString());
@@ -149,7 +149,7 @@ app.put('/posts/:username/:pid/downvote', (req, res) => {
   });
 });
 
-app.put('/posts/:username/:pid/upvote', (req, res) => {
+app.put('/posts/upvote/:pid/:username', (req, res) => {
   conn.query(`SELECT * FROM votes WHERE username=? AND pId=?;`, [req.params.username, req.params.pid], (err, rows) => {
     if (err) {
       console.log(err.toString());
@@ -191,6 +191,26 @@ app.put('/posts/:username/:pid/upvote', (req, res) => {
       });
     }
   });
+});
+
+app.put('/posts/delete/:pid/:username', (req, res) => {
+  conn.query('SELECT * FROM posts WHERE pId=? AND username=?;', [req.params.pid, req.params.username], (err, rows) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send('FATAL ERROR');
+      return;
+    }
+    if (rows.length !== 0) {
+      conn.query(`UPDATE posts SET status='deleted' WHERE pId=? AND username=?;`, [req.params.pid, req.params.username], (err) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500).send('FATAL ERROR');
+          return;
+        }
+        res.status(200).send('Don\'t Worry. We deleted your BULLSHIT.');
+      });
+    }
+  })
 });
 
 app.listen(port, () => {

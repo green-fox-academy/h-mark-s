@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS posts(
 	timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	score INT NOT NULL DEFAULT '0',
 	username VARCHAR(100) NOT NULL,
+	status ENUM('active', 'deleted') DEFAULT('active'),
 	PRIMARY KEY(pId),
 	FOREIGN KEY(username) REFERENCES users(username)
 );
