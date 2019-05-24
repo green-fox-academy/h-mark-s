@@ -23,7 +23,6 @@ window.onload = () => {
   fullListRequest.send();
   fullListRequest.onload = (data) => {
     let allTheData = JSON.parse(data.target.response);
-    console.log(allTheData[0]);
     for (let i = 0; i < allTheData.length; i++) {
       fullList.innerHTML += '<tr><td>' + allTheData[i].title + '</td><td>' + allTheData[i].author + '</td><td>' + allTheData[i].category + '</td><td>' + allTheData[i].publisher + '</td><td>' + allTheData[i].price + '</td></tr>';
     }

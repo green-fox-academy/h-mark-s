@@ -7,7 +7,7 @@
   <title>Awesome Bookstore</title>
 </head>
 <body>
-  <h1>ALL the Books</h1>
+  <h1>ALL the Books EVER</h1>
   <table class="full-list">
     <tr>
       <th>Title</th>
@@ -17,6 +17,21 @@
       <th>Price</th>
     </tr>
   </table>
+  <h1>Filter my $hit!</h1>
+  <form action="/filter" method="get">
+    Title:
+    <input name="book_name">
+    Author:
+    <input name="aut_name">
+    Category:
+    <input name="cate_descrip">
+    Publisher:
+    <input name="pub_name">
+    Price:
+    <input name="price">
+    <button type="submit">Filter it. NOW!</button>
+</form>
+
   <script src="/app.js"></script>
 </body>
 </html>
