@@ -40,14 +40,14 @@ app.post('/posts', (req, res) => {
       res.status(500);
       return;
     }
-  });
-  conn.query(`SELECT * FROM posts ORDER BY pId DESC LIMIT 1;`, (err, rows) => {
-    if (err) {
-      console.log(err.toString());
-      res.status(500);
-      return;
-    }
-    res.status(201).json(rows);
+    conn.query(`SELECT * FROM posts ORDER BY pId DESC LIMIT 1;`, (err, rows) => {
+      if (err) {
+        console.log(err.toString());
+        res.status(500);
+        return;
+      }
+      res.status(201).json(rows);
+    });
   });
 });
 
@@ -58,15 +58,15 @@ app.post('/users', (req, res) => {
       res.status(500);
       return;
     }
+    conn.query(`SELECT * FROM users WHERE username="` + req.body.username +`";`, (err, rows) => {
+      if (err) {
+        console.log(err.toString());
+        res.status(500);
+        return;
+      }
+      res.status(201).json(rows);
+    });
   });
-  conn.query(`SELECT * FROM users WHERE username="` + req.body.username +`";`, (err, rows) => {
-    if (err) {
-      console.log(err.toString());
-      res.status(500);
-      return;
-    }
-    res.status(201).json(rows);
-  })
 });
 
 app.put('/posts/:pid/upvote', (req, res) => {
@@ -76,14 +76,14 @@ app.put('/posts/:pid/upvote', (req, res) => {
       res.status(500);
       return;
     }
-  });
-  conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
-    if (err) {
-      console.log(err.toString());
-      res.status(500);
-      return;
-    }
-    res.status(202).json(rows);
+    conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+      if (err) {
+        console.log(err.toString());
+        res.status(500);
+        return;
+      }
+      res.status(202).json(rows);
+    });
   });
 });
 
@@ -101,24 +101,23 @@ app.put('/posts/:username/:pid/downvote', (req, res) => {
           res.status(500);
           return;
         }
+        conn.query('UPDATE posts SET score = score - 1 WHERE pId=' + req.params.pid, (err) => {
+          if (err) {
+            console.log(err.toString());
+            res.status(500);
+            return;
+          }
+          conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+            if (err) {
+              console.log(err.toString());
+              res.status(500);
+              return;
+            }
+            res.status(202).json(rows);
+          });
+        });
       });
-      conn.query('UPDATE posts SET score = score - 1 WHERE pId=' + req.params.pid, (err) => {
-        if (err) {
-          console.log(err.toString());
-          res.status(500);
-          return;
-        }
-      });
-      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
-        if (err) {
-          console.log(err.toString());
-          res.status(500);
-          return;
-        }
-        res.status(202).json(rows);
-      });
-    }
-    else {
+    } else {
       conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
         if (err) {
           console.log(err.toString());
@@ -146,24 +145,23 @@ app.put('/posts/:username/:pid/upvote', (req, res) => {
           res.status(500);
           return;
         }
+        conn.query('UPDATE posts SET score = score + 1 WHERE pId=' + req.params.pid, (err) => {
+          if (err) {
+            console.log(err.toString());
+            res.status(500);
+            return;
+          }
+          conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+            if (err) {
+              console.log(err.toString());
+              res.status(500);
+              return;
+            }
+            res.status(202).json(rows);
+          });
+        });
       });
-      conn.query('UPDATE posts SET score = score + 1 WHERE pId=' + req.params.pid, (err) => {
-        if (err) {
-          console.log(err.toString());
-          res.status(500);
-          return;
-        }
-      });
-      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
-        if (err) {
-          console.log(err.toString());
-          res.status(500);
-          return;
-        }
-        res.status(202).json(rows);
-      });
-    }
-    else {
+    } else {
       conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
         if (err) {
           console.log(err.toString());
