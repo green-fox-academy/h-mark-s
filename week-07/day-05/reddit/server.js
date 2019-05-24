@@ -60,7 +60,7 @@ app.post('/users', (req, res) => {
       res.status(500).send('FATAL ERROR');
       return;
     }
-    conn.query(`SELECT * FROM users WHERE username="` + req.body.username +`";`, (err, rows) => {
+    conn.query(`SELECT * FROM users WHERE username=?;`, req.body.username, (err, rows) => {
       if (err) {
         console.log(err.toString());
         res.status(500).send('FATAL ERROR');
@@ -72,13 +72,13 @@ app.post('/users', (req, res) => {
 });
 
 app.put('/posts/:pid/upvote', (req, res) => {
-  conn.query(`UPDATE posts SET score = score + 1 WHERE pId=` + req.params.pid, (err) => {
+  conn.query(`UPDATE posts SET score = score + 1 WHERE pId=?;`, req.params.pid, (err) => {
     if (err) {
       console.log(err.toString());
       res.status(500).send('FATAL ERROR');
       return;
     }
-    conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+    conn.query(`SELECT * FROM posts WHERE pId=?;`, req.params.pid, (err, rows) => {
       if (err) {
         console.log(err.toString());
         res.status(500).send('FATAL ERROR');
@@ -90,7 +90,7 @@ app.put('/posts/:pid/upvote', (req, res) => {
 });
 
 app.put('/posts/:username/:pid/downvote', (req, res) => {
-  conn.query(`SELECT * FROM votes WHERE username="` + req.params.username+ `" AND pId ="` + req.params.pid + `";`, (err, rows) => {
+  conn.query(`SELECT * FROM votes WHERE username=? AND pId=?;`, [req.params.username, req.params.pid], (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500).send('FATAL ERROR');
@@ -103,13 +103,13 @@ app.put('/posts/:username/:pid/downvote', (req, res) => {
           res.status(500).send('FATAL ERROR');
           return;
         }
-        conn.query('UPDATE posts SET score = score - 1 WHERE pId=' + req.params.pid, (err) => {
+        conn.query('UPDATE posts SET score = score - 1 WHERE pId=?;', req.params.pid, (err) => {
           if (err) {
             console.log(err.toString());
             res.status(500).send('FATAL ERROR');
             return;
           }
-          conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+          conn.query(`SELECT * FROM posts WHERE pId=?;`, (err, rows) => {
             if (err) {
               console.log(err.toString());
               res.status(500).send('FATAL ERROR');
@@ -120,7 +120,7 @@ app.put('/posts/:username/:pid/downvote', (req, res) => {
         });
       });
     } else {
-      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+      conn.query(`SELECT * FROM posts WHERE pId=?;`, req.params.pid, (err, rows) => {
         if (err) {
           console.log(err.toString());
           res.status(500).send('FATAL ERROR');
@@ -134,7 +134,7 @@ app.put('/posts/:username/:pid/downvote', (req, res) => {
 });
 
 app.put('/posts/:username/:pid/upvote', (req, res) => {
-  conn.query(`SELECT * FROM votes WHERE username="` + req.params.username+ `" AND pId ="` + req.params.pid + `";`, (err, rows) => {
+  conn.query(`SELECT * FROM votes WHERE username=? AND pId=?;`, [req.params.username, req.params.pid], (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500).send('FATAL ERROR');
@@ -147,13 +147,13 @@ app.put('/posts/:username/:pid/upvote', (req, res) => {
           res.status(500).send('FATAL ERROR');
           return;
         }
-        conn.query('UPDATE posts SET score = score + 1 WHERE pId=' + req.params.pid, (err) => {
+        conn.query('UPDATE posts SET score = score + 1 WHERE pId=?;', req.params.pid, (err) => {
           if (err) {
             console.log(err.toString());
             res.status(500).send('FATAL ERROR');
             return;
           }
-          conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+          conn.query(`SELECT * FROM posts WHERE pId=?;`, req.params.pid, (err, rows) => {
             if (err) {
               console.log(err.toString());
               res.status(500).send('FATAL ERROR');
@@ -164,7 +164,7 @@ app.put('/posts/:username/:pid/upvote', (req, res) => {
         });
       });
     } else {
-      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+      conn.query(`SELECT * FROM posts WHERE pId=?;`, req.params.pid, (err, rows) => {
         if (err) {
           console.log(err.toString());
           res.status(500).send('FATAL ERROR');
