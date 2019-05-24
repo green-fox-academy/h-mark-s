@@ -51,7 +51,7 @@ app.post('/posts', (req, res) => {
   });
 });
 
-app.post('/posts/:id/upvote', (req, res) => {
+app.put('/posts/:id/upvote', (req, res) => {
   conn.query(`UPDATE post SET score = score + 1 WHERE id=` + req.params.id, (err) => {
     if (err) {
       console.log(err.toString());
@@ -69,7 +69,7 @@ app.post('/posts/:id/upvote', (req, res) => {
   });
 });
 
-app.post('/posts/:id/downvote', (req, res) => {
+app.put('/posts/:id/downvote', (req, res) => {
   conn.query(`UPDATE post SET score = score -1 WHERE id=` + req.params.id, (err) => {
     if (err) {
       console.log(err.toString());
