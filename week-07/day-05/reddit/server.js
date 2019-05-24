@@ -87,21 +87,93 @@ app.put('/posts/:pid/upvote', (req, res) => {
   });
 });
 
-app.put('/posts/:pid/downvote', (req, res) => {
-  conn.query(`UPDATE posts SET score = score -1 WHERE pId=` + req.params.pid, (err) => {
+app.put('/posts/:username/:pid/downvote', (req, res) => {
+  conn.query(`SELECT * FROM votes WHERE username="` + req.params.username+ `" AND pId ="` + req.params.pid + `";`, (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
       return;
+    }
+    if (rows.length === 0) {
+      conn.query('INSERT INTO votes(username, pId, vote) VALUES(?,?,?);', [req.params.username, req.params.pid, -1], (err) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+      });
+      conn.query('UPDATE posts SET score = score - 1 WHERE pId=' + req.params.pid, (err) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+      });
+      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+        res.status(202).json(rows);
+      });
+    }
+    else {
+      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+        console.log('ONE VOTE per post, motherfucker.')
+        res.status(406).json(rows);
+      });
     }
   });
-  conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+});
+
+app.put('/posts/:username/:pid/upvote', (req, res) => {
+  conn.query(`SELECT * FROM votes WHERE username="` + req.params.username+ `" AND pId ="` + req.params.pid + `";`, (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
       return;
     }
-    res.status(202).json(rows);
+    if (rows.length === 0) {
+      conn.query('INSERT INTO votes(username, pId, vote) VALUES(?,?,?);', [req.params.username, req.params.pid, 1], (err) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+      });
+      conn.query('UPDATE posts SET score = score + 1 WHERE pId=' + req.params.pid, (err) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+      });
+      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+        res.status(202).json(rows);
+      });
+    }
+    else {
+      conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
+        if (err) {
+          console.log(err.toString());
+          res.status(500);
+          return;
+        }
+        console.log('ONE VOTE per post, motherfucker!')
+        res.status(406).json(rows);
+      });
+    }
   });
 });
 
