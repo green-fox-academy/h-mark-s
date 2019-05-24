@@ -24,7 +24,7 @@ conn.connect(err => {
 });
 
 app.get('/posts', (req, res) => {
-  conn.query(`SELECT * FROM post;`, (err, rows) => {
+  conn.query(`SELECT * FROM posts;`, (err, rows) => {
     if (err) {
       console.log(err.toString());
       return;
@@ -34,14 +34,14 @@ app.get('/posts', (req, res) => {
 });
 
 app.post('/posts', (req, res) => {
-  conn.query(`INSERT INTO post(title, url) VALUES(?,?);`, [req.body.title, req.body.url], (err) => {
+  conn.query(`INSERT INTO posts(title, url, username) VALUES(?,?,?);`, [req.body.title, req.body.url, req.body.username], (err) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
       return;
     }
   });
-  conn.query(`SELECT * FROM post ORDER BY id DESC LIMIT 1;`, (err, rows) => {
+  conn.query(`SELECT * FROM posts ORDER BY pId DESC LIMIT 1;`, (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
@@ -51,15 +51,33 @@ app.post('/posts', (req, res) => {
   });
 });
 
-app.put('/posts/:id/upvote', (req, res) => {
-  conn.query(`UPDATE post SET score = score + 1 WHERE id=` + req.params.id, (err) => {
+app.post('/users', (req, res) => {
+  conn.query(`INSERT INTO users(username) VALUES(?);`, req.body.username, (err) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
       return;
     }
   });
-  conn.query(`SELECT * FROM post WHERE id=` + req.params.id, (err, rows) => {
+  conn.query(`SELECT * FROM users WHERE username="` + req.body.username +`";`, (err, rows) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500);
+      return;
+    }
+    res.status(201).json(rows);
+  })
+});
+
+app.put('/posts/:pid/upvote', (req, res) => {
+  conn.query(`UPDATE posts SET score = score + 1 WHERE pId=` + req.params.pid, (err) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500);
+      return;
+    }
+  });
+  conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
@@ -69,15 +87,15 @@ app.put('/posts/:id/upvote', (req, res) => {
   });
 });
 
-app.put('/posts/:id/downvote', (req, res) => {
-  conn.query(`UPDATE post SET score = score -1 WHERE id=` + req.params.id, (err) => {
+app.put('/posts/:pid/downvote', (req, res) => {
+  conn.query(`UPDATE posts SET score = score -1 WHERE pId=` + req.params.pid, (err) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
       return;
     }
   });
-  conn.query(`SELECT * FROM post WHERE id=` + req.params.id, (err, rows) => {
+  conn.query(`SELECT * FROM posts WHERE pId=` + req.params.pid, (err, rows) => {
     if (err) {
       console.log(err.toString());
       res.status(500);
