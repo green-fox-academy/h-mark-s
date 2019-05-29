@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <form action="button-disable.html" method="post">
+    <p>What is your favourite pet?</p>
+    <label for="dog">Dog</label>
+    <input type="radio" name="favorite-pet" id="dog" value="Dog">
+    <label for="cat">Cat</label>
+    <input type="radio" name="favorite-pet" id="cat" value="Cat">
+    <label for="goldfish">Viktor the goldfish</label>
+    <input type="radio" name="favorite-pet" id="goldfish" value="Viktor the goldfish">
+    <p>Do you want to sign up for cat facts?</p>
+    <label for="yes">Yes</label>
+    <input type="radio" name="cat-facts" id="yes" value="Yes">
+    <label for="no">No</label>
+    <input type="radio" name="cat-facts" id="no" value="No">
+    <button class="i-love-cats" type="submit" disabled>I love cats</button>
+    <button class="submit" type="submit" disabled="true">Signup</button>
+  </form>
+  <script src="button-disable.js"></script>
+</body>
+</html>
