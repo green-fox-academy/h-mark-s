@@ -46,26 +46,36 @@ input {
   margin: 0 50px;
 }
 
-/* .password {
+.password {
   display: flex;
-  width: 100%;
+  width: 88%;
   justify-content: flex-start;
   align-items: center;
+  margin-right: 0
 }
 
 .password > input {
   margin: 0 0 0 50px;
+  width: 100%
 }
 
-div > img {
-  height:30px;
-  background-color: #ffffff;
-  border: 1px solid #dedede;
-} */
+img {
+  height:25px;
+  background-color: #dedede;
+  margin: 0 10px;
+}
 
-p {
+.comment {
   font-size: 10px;
   margin: 10px 50px;
+}
+
+.troubleshoot {
+  text-decoration: none;
+  font-size: 12px;
+  text-align: right;
+  text-transform: uppercase;
+  margin-right: 50px;
 }
 
 button {

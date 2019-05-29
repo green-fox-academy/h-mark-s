@@ -12,13 +12,15 @@
         <label for="username">username</label>
         <input type="text" id="username" name="username" minlength="6" maxlength="30" placeholder="Enter your username!" required autofocus />
         <label for="password">password</label>
-        <!-- <div class="password"> -->
+        <div class="password">
           <input type="password" id="password" name="password" placeholder="Enter your password!" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required />
-          <!-- <img src="eye-open.svg"> -->
-        <!-- </div> -->
-        <p>(Your password must incude at least one letter and one number, and it must be at least 8 characters long.)</p>
+          <img src="eye-closed.svg">
+        </div>
+        <p class="comment">(Your password must incude at least one letter and one number, and it must be at least 8 characters long.)</p>
+        <a href="#" id="forgotten" class="troubleshoot">forgot your password?</a>
         <button type="submit">Login</button>
       </form>
+      <script src="login-form.js"></script>
     </div>
   </body>
 </html>
