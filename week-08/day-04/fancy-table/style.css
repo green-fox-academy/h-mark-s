@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:200,300,400&display=swap');
+
+* {
+  margin: 0;
+  font-family: 'Fira Sans';
+}
+
+body {
+  background-color: #3f88e5;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  width: 60%;
+  height: 80%;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  border-bottom: 4px solid #9ba5ad;
+}
+
+th, td {
+  padding-left: 30px;
+}
+
+th:nth-child(2n+1),td:nth-child(2n +1) {
+  border-right: 2px solid #9ba5ad;
+}
+
+th {
+  background-color: #212328;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: left;
+  height: 70px;
+  width: 200px;
+}
+
+tr {
+  background-color: #ffffff;
+}
+
+tr:nth-child(2n+1) {
+  background-color: #eaeaea;
+}
+
+td {
+  color: #686782;
+  height: 70px;
+  font-size: 18px;
+  border-top: 2px solid #9ba5ad;
+}
+
+td:nth-child(2n)::before {
+  content: '$ ';
+}
