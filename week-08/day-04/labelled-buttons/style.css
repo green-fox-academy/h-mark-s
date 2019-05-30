@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+* {
+  margin: 0;
+}
+body {
+  background-color: #313841;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.main-container {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 20px;
+  color: #ffffffbe;
+}
+
+button ~ div {
+  opacity: 0;
+  transition: 0.2s;
+  width: 150px;
+  height: 50px;
+  border-radius: 0 2px 2px 0;
+  font-weight: 500;
+  text-align: center;
+  line-height: 3rem;
+}
+
+button[data-action="delete"] ~ div {
+  background-color: #f34541;
+}
+
+button[data-action="confirm"] ~ div {
+  background-color: #38ba7d;
+}
+
+button {
+  margin-bottom: 10px;
+  border: none;
+  background-color: #1c242b;
+  height: 50px;
+  width: 50px;
+  color: #ffffffbe;
+  font-size: 30px;
+}
+
+button[data-action="delete"]:hover {
+  color: #f34541;
+}
+
+button[data-action="confirm"]:hover {
+  color: #38ba7d;
+}
+
+button:hover ~ div {
+  opacity: 1;
+}
+
+button:focus {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
