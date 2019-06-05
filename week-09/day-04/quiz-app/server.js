@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
+const path = require('path');
 require('dotenv').config();
 const port = 5500;
 
@@ -26,11 +27,11 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.get('/game', (req, res) => {
-  res.sendFile(path.join(__dirname, game.html));
+  res.sendFile(path.join(__dirname, '/game.html'));
 });
 
 app.get('/questions', (req, res) => {
-  res.sendFile(path.join(__dirname, questions.html));
+  res.sendFile(path.join(__dirname + '/public/' + 'questions.html'));
 });
 
 app.get('/api/game', (req, res) => {
@@ -75,6 +76,52 @@ app.get('/api/game', (req, res) => {
 app.get('/api/questions', (req, res) => {
   conn.query('SELECT * FROM questions;', (err, rows) => {
     res.json(rows);
+  });
+});
+
+app.post('/api/questions', (req, res) => {
+  conn.query('INSERT INTO questions(question) VALUES(?);', [req.body.question], (err) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(400).send('Database error!');
+      return;
+    }
+    conn.query('SELECT id from questions ORDER BY id DESC LIMIT 1;', (err, id) => {
+      if (err) {
+        console.log(err.toString());
+        res.status(400).send('Database error!');
+        return;
+      }
+      for (let i = 0; i < req.body.answers.length; i++) {
+        let isCorrect = Number(req.body.answers[i].is_correct);
+        conn.query('INSERT INTO answers(question_id, answer, is_correct) VALUES(?, ?, ?);', [id[0].id, req.body.answers[i].answer, isCorrect], (err, rows) => {
+          if (err) {
+            console.log(err.toString());
+            res.status(400).send('Database error!');
+            return;
+          }
+        });
+      }
+      res.status(200).send('OK');
+    });    
+  });
+});
+
+app.delete('/api/questions/:id', (req, res) => {
+  conn.query('DELETE FROM questions WHERE id=?;', [req.params.id], (err) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(400).send('Database error!');
+      return;
+    }
+    conn.query('DELETE FROM answers WHERE question_id=?;', [req.params.id], (err) => {
+      if (err) {
+        console.log(err.toString());
+        res.status(400).send('Database error!');
+        return;
+      }
+      res.status(200).send('Question deleted')
+    });
   });
 });
 
