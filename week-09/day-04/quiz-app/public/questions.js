@@ -1,6 +1,6 @@
 'use strict';
 
-const addQuestion = document.querySelector('form');
+const addQuestion = document.querySelector('.add-question');
 
 addQuestion.addEventListener('submit', (event) => {
   event.preventDefault();
