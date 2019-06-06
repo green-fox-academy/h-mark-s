@@ -40,9 +40,15 @@ answers.forEach(answer => {
       answer.setAttribute('style', 'background: red');
       document.querySelector('.correct').setAttribute('style', 'background: green');
     }
+    answers.forEach(answer => {
+      answer.setAttribute('disabled', '');
+    });
     setTimeout(() => {
       newQuestion();
-      answers.forEach(answer => answer.setAttribute('style', ''))
+      answers.forEach(answer => {
+        answer.setAttribute('style', '')
+        answer.removeAttribute('disabled');
+      });
     }, 3000);
   });
 });
