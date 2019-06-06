@@ -35,12 +35,16 @@ app.get('/questions', (req, res) => {
 });
 
 app.get('/api/game', (req, res) => {
-  conn.query(`SELECT * FROM questions;`, (err, rows) => {
+  conn.query(`SELECT id FROM questions;`, (err, rows) => {
     if (err) {
       res.status(400).send('Database error!');
       return;
     }
-    const randomId = Math.floor(Math.random() * Math.floor(rows.length)) + 1;
+    const allIds = [];
+    rows.forEach(question => {
+      allIds.push(question.id);
+    });
+    const randomId = allIds[Math.floor(Math.random() * Math.floor(allIds.length))];
     conn.query(
       `SELECT questions.id AS id, questions.question AS question, answers.*
       FROM questions
