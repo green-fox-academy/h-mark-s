@@ -25,7 +25,7 @@ function newQuestion() {
       return;
     }
     questionCounter++;
-    score.innerText = currentScore;
+    score.innerText = 'score: ' + currentScore;
     question.innerText = response.question;
     for (let i = 0; i < answers.length; i++) {
       answers[i].innerText = response.answers[i].answer;
