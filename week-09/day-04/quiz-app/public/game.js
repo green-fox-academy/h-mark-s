@@ -46,11 +46,11 @@ window.onload = () => {
 answers.forEach(answer => {
   answer.addEventListener('click', () => {
     if (answer.classList.contains('correct')) {
-      answer.setAttribute('style', 'background: green');
+      answer.setAttribute('style', 'background: #00b967');
       currentScore++;
-      score.innerText = currentScore;
+      score.innerText = 'score: ' + currentScore;
     } else {
-      answer.setAttribute('style', 'background: red');
+      answer.setAttribute('style', 'background: #ac1d1c');
       document.querySelector('.correct').setAttribute('style', 'background: green');
     }
     answers.forEach(answer => {
@@ -62,6 +62,6 @@ answers.forEach(answer => {
         answer.setAttribute('style', '')
         answer.removeAttribute('disabled');
       });
-    }, 10);
+    }, 1000);
   });
 });
