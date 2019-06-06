@@ -1,6 +1,30 @@
 'use strict';
 
 const addQuestion = document.querySelector('.add-question');
+const manageQuestions = document.querySelector('.manage-questions');
+
+function refreshQuestions() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'http://localhost:5500/api/questions');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = data => {
+    let response = JSON.parse(data.target.response);
+    response.forEach(response => {
+      let question = document.createElement('label')
+      let deleteButton = document.createElement('input');
+      deleteButton.setAttribute('type', 'submit');
+      deleteButton.setAttribute('class', 'delete-button');
+      manageQuestions.appendChild(question).innerText = response.question;
+      manageQuestions.appendChild(deleteButton).value = 'DELETE';
+    });
+    let allDeleteButtons = document.querySelectorAll('.delete-button');
+    // allDeleteButtons.addEventListener('???')
+
+  }
+  xhr.send();
+}
+
+refreshQuestions();
 
 addQuestion.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -18,8 +42,7 @@ addQuestion.addEventListener('submit', (event) => {
     }
   }
   xhr.onload = () => {
-    fields.forEach(field => field.value = '');
-    radioButtons.forEach(button => button.checked = false);
+    addQuestion.reset()
   }
   xhr.send(JSON.stringify({
     "question": event.target.elements.question.value,
