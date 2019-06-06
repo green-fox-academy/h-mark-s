@@ -102,7 +102,7 @@ app.post('/api/questions', (req, res) => {
           }
         });
       }
-      res.status(200).send('OK');
+      res.status(200).json(id);
     });    
   });
 });
