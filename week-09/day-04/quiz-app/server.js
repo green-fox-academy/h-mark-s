@@ -7,6 +7,8 @@ const path = require('path');
 require('dotenv').config();
 const port = 5500;
 
+let questionsAsked = [];
+
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -40,11 +42,28 @@ app.get('/api/game', (req, res) => {
       res.status(400).send('Database error!');
       return;
     }
-    const allIds = [];
+
+    let allIds = [];
+
     rows.forEach(question => {
       allIds.push(question.id);
     });
-    const randomId = allIds[Math.floor(Math.random() * Math.floor(allIds.length))];
+
+    allIds = allIds.filter((element) => !questionsAsked.includes(element));
+
+    let randomId = 0;
+
+    if (allIds.length !== 0) {
+      randomId = allIds[Math.floor(Math.random() * Math.floor(allIds.length))];
+      questionsAsked.push(randomId);
+    } else {
+      res.status(404).json({
+        "error": "no more questions to ask"
+      });
+      questionsAsked = [];
+      return;
+    }
+
     conn.query(
       `SELECT questions.id AS id, questions.question AS question, answers.*
       FROM questions
