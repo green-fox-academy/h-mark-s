@@ -56,6 +56,22 @@ body {
   border-radius: 5px;
 }
 
+.answers > button:hover {
+  filter: brightness(110%);
+}
+
+.answers > button:active {
+  filter: brightness(90%);
+}
+
+.answers > button:focus {
+  outline: none;
+}
+
+.answers > button::-moz-focus-inner {
+  border: 0;
+}
+
 .navigation {
   display: flex;
   justify-content: center;
