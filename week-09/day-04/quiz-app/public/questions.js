@@ -17,9 +17,9 @@ function refreshQuestions() {
       
       const row = document.createElement('tr');
       row.id = data.id;
-      const newQuestion = document.createElement('td');
-      newQuestion.innerText = data.question;
-      row.appendChild(newQuestion);
+      const tableData = document.createElement('td');
+      tableData.innerText = data.question;
+      row.appendChild(tableData);
       
       const deleteButton = document.createElement('button');
       deleteButton.id = data.id;
@@ -35,8 +35,10 @@ function refreshQuestions() {
         }
         deleteQuestion.send();
       });
-      deleteButton.innerText = 'DELETE';
-      row.appendChild(deleteButton);
+      deleteButton.innerText = 'delete';
+      const deleteButtonContainer = document.createElement('td');
+      deleteButtonContainer.appendChild(deleteButton);
+      row.appendChild(deleteButtonContainer);
       manageQuestions.appendChild(row);
     });
   }
@@ -61,11 +63,11 @@ addQuestion.addEventListener('submit', (event) => {
     const addedQuestion = JSON.parse(data.target.response)[0];
     
     const row = document.createElement('tr');
-    const newQuestion = document.createElement('td');
+    const tableData = document.createElement('td');
     
     row.id = addedQuestion.id;
-    newQuestion.innerText = document.querySelector('#question').value;
-    row.appendChild(newQuestion);
+    tableData.innerText = document.querySelector('#question').value;
+    row.appendChild(tableData);
     
     const deleteButton = document.createElement('button');
     deleteButton.id = addedQuestion.id;
@@ -81,7 +83,7 @@ addQuestion.addEventListener('submit', (event) => {
       }
       deleteQuestion.send();
     });
-    deleteButton.innerText = 'DELETE';
+    deleteButton.innerText = 'delete';
     row.appendChild(deleteButton);
     manageQuestions.appendChild(row);
     addQuestion.reset()
