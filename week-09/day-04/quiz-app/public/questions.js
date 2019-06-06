@@ -3,28 +3,38 @@
 const addQuestion = document.querySelector('.add-question');
 const manageQuestions = document.querySelector('.manage-questions');
 
-function refreshQuestions() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://localhost:5500/api/questions');
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.onload = data => {
-    let response = JSON.parse(data.target.response);
-    response.forEach(response => {
-      let question = document.createElement('label')
-      let deleteButton = document.createElement('input');
-      deleteButton.setAttribute('type', 'submit');
-      deleteButton.setAttribute('class', 'delete-button');
-      manageQuestions.appendChild(question).innerText = response.question;
-      manageQuestions.appendChild(deleteButton).value = 'DELETE';
-    });
-    let allDeleteButtons = document.querySelectorAll('.delete-button');
-    // allDeleteButtons.addEventListener('???')
-
-  }
-  xhr.send();
+window.onload = () => {
+  refreshQuestions();
 }
 
-refreshQuestions();
+function refreshQuestions() {
+  const getQuestions = new XMLHttpRequest();
+  getQuestions.open('GET', 'http://localhost:5500/api/questions');
+  getQuestions.setRequestHeader('Content-Type', 'application/json');
+  getQuestions.onload = data => {
+    const response = JSON.parse(data.target.response);
+    response.forEach(data => {
+      const row = document.createElement('tr');
+      const newQuestion = document.createElement('td');
+      newQuestion.innerText = data.question;
+      row.appendChild(newQuestion);
+      
+      const deleteButton = document.createElement('button');
+      deleteButton.id = data.id;
+      deleteButton.addEventListener('click', (event) => {
+        const deleteQuestion = new XMLHttpRequest();
+        deleteQuestion.open('DELETE', `http://localhost:5500/api/questions/${data.id}`);
+        deleteQuestion.send();
+        manageQuestions.innerHTML = '';
+        refreshQuestions();
+      });
+      deleteButton.innerText = 'DELETE';
+      row.appendChild(deleteButton);
+      manageQuestions.appendChild(row);
+    });
+  }
+  getQuestions.send();
+}
 
 addQuestion.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -32,7 +42,6 @@ addQuestion.addEventListener('submit', (event) => {
   xhr.open('POST', 'http://localhost:5500/api/questions');
   xhr.setRequestHeader('Content-Type', 'application/json');
   let isCorrectArray = [];
-  const fields = document.querySelectorAll('input[type="text"]');
   const radioButtons = document.querySelectorAll('input[type="radio"]');
   for (let i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked === true) {
@@ -64,5 +73,7 @@ addQuestion.addEventListener('submit', (event) => {
         "is_correct": isCorrectArray[3],
       }
     ]
-  }))
+  }));
+  manageQuestions.innerHTML = '';
+  refreshQuestions();
 });
