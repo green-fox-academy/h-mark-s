@@ -1,14 +1,14 @@
-CREATE DATABASE IF NOT EXISTS auction-app;
-USE auction-app;
+CREATE DATABASE auction_app;
+USE auction_app;
 
-CREATE TABLE IF NOT EXISTS items (
+CREATE TABLE items (
 	id INT NOT NULL AUTO_INCREMENT,
 	title VARCHAR(120) NOT NULL,
 	expiry_date DATETIME NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS bids (
+CREATE TABLE bids (
 	bId INT NOT NULL AUTO_INCREMENT,
 	iId INT NOT NULL,
 	name VARCHAR(120) NOT NULL,
@@ -16,3 +16,5 @@ CREATE TABLE IF NOT EXISTS bids (
 	PRIMARY KEY (bId),
   FOREIGN KEY(iId) references items(id)
 );
+
+INSERT INTO items (title, expiry_date) VALUES ('book', NOW());
